@@ -1,3 +1,5 @@
+
+Wie nennt man militante Veganer? Salatisten.
     Veganer werden nicht beerdigt. Sie werden kompostiert.
     Vegetarier essen den Tieren das Essen weg.
     Lasst uns anfangen, sonst wird das Essen welk.
