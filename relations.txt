@@ -1,0 +1,9 @@
+Datenbank relationen:
+
+category (_id_, title, number_of_items)
+
+item (_id_, title, description, contact, *picture_id*, *picture_url)
+
+chat(_message_id_, message, sender, recipient)
+
+
