@@ -7,21 +7,23 @@ category (_id_, title, number_of_items, description?)
 
 # description, je nachdem, wie abstrakt die Kategorien sind. 
 
-item (_id_, title, description, contact_email, contact_phone_number?, picture_name, picture_url)
+item (_id_, title, description, contact_email, contact_phone_number?, picture_name, picture_url, tag/category)
 
 # vielleicht eigene Picture-Tabelle
   
-  picture (_picture_id_, picture_url, picture_name, picture_description?)
+  picture (_picture_id_, picture_url, picture_name, picture_description?, *item_id*)
 
 chat (_message_id_, message, sender, recipient, *chatroom_id*, timestamp)
 
 # timestamp in YYYY/MM/DD MM:SS
 # chatroom, da zwei Benutzer mehrere Konversationen miteinerander gehabt haben könnten und wir (glaube ich) keine Nachrichten von alten Konversationen anzeigen wollen. 
 
-chatroom (_chatroom_id_, participants, 
+chatroom (_chatroom_id_, participants, number_of_messages)
 
 User (_user_id_, rolle?, email, name, sirname, phone_number?, nickname?, secret?)
 
 # für die Moderatoren, Einlogprozess
 
 blacklist (_email_, domain?)
+
+# Entity-Relationship-Model mit John?
