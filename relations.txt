@@ -7,7 +7,7 @@ category (_id_, title, number_of_items)
 
 item (_id_, title, description, contact_email, picture_name, picture_url, *category_title*, edit_token)
 
-chat (_message_id_, message, sender, recipient, *chatroom_id*, timestamp)
+messages (_message_id_, message, sender, recipient, *chatroom_id*, timestamp)
 
 # timestamp in YYYY/MM/DD MM:SS
 # chatroom, da zwei Benutzer mehrere Konversationen miteinerander gehabt haben könnten und wir (glaube ich) keine Nachrichten von alten Konversationen anzeigen wollen. 
