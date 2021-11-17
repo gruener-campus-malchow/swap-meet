@@ -29,7 +29,7 @@ USE `strike_swap-meet`;
 --
 -- Tabellenstruktur für Tabelle `pictures`
 --
-DROP TABLE IF EXISTS `pictures`;
+
 CREATE TABLE `pictures` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `url` text NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE `pictures` (
 --
 -- Tabellenstruktur für Tabelle `blacklist_domain`
 --
-DROP TABLE IF EXISTS `blacklist_domain`;
+
 CREATE TABLE `blacklist_domain` (
   `domain` varchar(120) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -49,7 +49,7 @@ CREATE TABLE `blacklist_domain` (
 --
 -- Tabellenstruktur für Tabelle `blacklist_person`
 --
-DROP TABLE IF EXISTS `blacklist_person`;
+
 CREATE TABLE `blacklist_person` (
   `email` varchar(120) NOT NULL PRIMARY KEY
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -59,7 +59,7 @@ CREATE TABLE `blacklist_person` (
 --
 -- Tabellenstruktur für Tabelle `category`
 --
-DROP TABLE IF EXISTS `category`;
+
 CREATE TABLE `category` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL
@@ -79,7 +79,7 @@ CREATE TABLE `category` (
 --
 -- Tabellenstruktur für Tabelle `item`
 --
-DROP TABLE IF EXISTS `item`;
+
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contact_mail` varchar(120) NOT NULL,
@@ -94,12 +94,12 @@ FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CA
 
 -- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `category_has_item`;
+
 CREATE TABLE `category_has_item` (
   `category_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `item_contact_mail` varchar(120) NOT NULL, 
-PRIMARY KEY(category_id, item_id, item_contact_mail)
+PRIMARY KEY(category_id, item_id, item_contact_mail),
   FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
@@ -107,7 +107,7 @@ PRIMARY KEY(category_id, item_id, item_contact_mail)
 --
 -- Tabellenstruktur für Tabelle `item_has_pictures`
 --
-DROP TABLE IF EXISTS `item_has_pictures`;
+
 CREATE TABLE `item_has_pictures` (
   `item_contact_mail` varchar(120) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -123,7 +123,7 @@ PRIMARY KEY(item_contact_mail, item_id, category_id),
 --
 -- Tabellenstruktur für Tabelle `messages`
 --
-DROP TABLE IF EXISTS `messages`;
+
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `message` text NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE `messages` (
 --
 -- Tabellenstruktur für Tabelle `moderators`
 --
-DROP TABLE IF EXISTS `moderators`;
+
 CREATE TABLE `moderators` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `email` varchar(120) NOT NULL
@@ -148,7 +148,7 @@ CREATE TABLE `moderators` (
 --
 -- Tabellenstruktur für Tabelle `chatroom`
 --
-DROP TABLE IF EXISTS `chatroom`;
+
 CREATE TABLE `chatroom` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `chat_token` varchar(42) NOT NULL,
