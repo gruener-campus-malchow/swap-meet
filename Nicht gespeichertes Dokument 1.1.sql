@@ -73,18 +73,6 @@ CREATE TABLE `category` (
 
 -- --------------------------------------------------------
 
---
--- Tabellenstruktur für Tabelle `chatroom`
---
-DROP TABLE IF EXISTS `chatroom`;
-CREATE TABLE `chatroom` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `chat_token` varchar(42) NOT NULL,
-  `number_of_messages` int(11) NOT NULL,
-  `recipient` varchar(120) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `item_contact_mail` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -112,6 +100,9 @@ CREATE TABLE `category_has_item` (
   `item_id` int(11) NOT NULL,
   `item_contact_mail` varchar(120) NOT NULL, 
 PRIMARY KEY(category_id, item_id, item_contact_mail)
+  FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Tabellenstruktur für Tabelle `item_has_pictures`
@@ -120,8 +111,11 @@ DROP TABLE IF EXISTS `item_has_pictures`;
 CREATE TABLE `item_has_pictures` (
   `item_contact_mail` varchar(120) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-PRIMARY KEY(item_contact_mail, item_id, category_id)
+  `picture_id` int(11) NOT NULL,
+PRIMARY KEY(item_contact_mail, item_id, category_id),
+  FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (picture_id) REFERENCES picture(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -136,7 +130,8 @@ CREATE TABLE `messages` (
   `sender` varchar(120) NOT NULL,
   `recipient` varchar(120) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `chatroom_id` int(11) NOT NULL
+  `chatroom_id` int(11) NOT NULL,
+   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -150,41 +145,22 @@ CREATE TABLE `moderators` (
   `email` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Tabellenstruktur für Tabelle `chatroom`
+--
+DROP TABLE IF EXISTS `chatroom`;
+CREATE TABLE `chatroom` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `chat_token` varchar(42) NOT NULL,
+  `number_of_messages` int(11) NOT NULL,
+  `recipient` varchar(120) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `item_contact_mail` varchar(120) NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
-
--- Constraints der Tabelle `category_has_item`
---
-ALTER TABLE `category_has_item`
-  ADD CONSTRAINT `category_has_item_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_category_has_item_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_category_has_item_item_contact_mail` FOREIGN KEY (`item_contact_mail`) REFERENCES `item`(`contact_mail`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints der Tabelle `chatroom`
---
-ALTER TABLE `chatroom`
-  ADD CONSTRAINT `chatroom_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `chatroom_ibfk_2` FOREIGN KEY (`item_contact_mail`) REFERENCES `contact_mail` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints der Tabelle `item`
---
-ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_2` FOREIGN KEY (`pictures_id`) REFERENCES `pictures` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints der Tabelle `item_has_pictures`
---
-ALTER TABLE `item_has_pictures`
-  ADD CONSTRAINT `fk_item_has_pictures_item_id` FOREIGN KEY (`item_id`) REFERENCES `item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints der Tabelle `messages`
---
-ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`chatroom_id`) REFERENCES `chatroom` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
