@@ -31,7 +31,7 @@ USE `strike_swap-meet`;
 --
 
 CREATE TABLE `pictures` (
-  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -61,14 +61,14 @@ CREATE TABLE `blacklist_person` (
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `title` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `contact_mail` varchar(120) NOT NULL,
-  `pictures_id` int(11) NOT NULL,
+  `pictures_id` int(11) UNSIGNED NOT NULL,
   `title` text(11) NOT NULL,
   `edit_token` varchar(42) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
@@ -78,8 +78,8 @@ FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CA
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `category_has_item` (
-  `category_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
+  `category_id` int(11) UNSIGNED NOT NULL,
+  `item_id` int(11) UNSIGNED NOT NULL,
   `item_contact_mail` varchar(120) NOT NULL, 
 PRIMARY KEY(category_id, item_id, item_contact_mail),
   FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -89,12 +89,12 @@ PRIMARY KEY(category_id, item_id, item_contact_mail),
 
 CREATE TABLE `item_has_pictures` (
   `item_contact_mail` varchar(120) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `picture_id` int(11) NOT NULL,
+  `item_id` int(11) UNSIGNED NOT NULL,
+  `pictures_id` int(11) UNSIGNED NOT NULL,
 PRIMARY KEY(item_contact_mail, item_id, category_id),
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (picture_id) REFERENCES picture(id) ON UPDATE CASCADE ON DELETE CASCADE
+  FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -104,7 +104,7 @@ PRIMARY KEY(item_contact_mail, item_id, category_id),
 --
 
 CREATE TABLE `messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `message` text NOT NULL,
   `sender` varchar(120) NOT NULL,
   `recipient` varchar(120) NOT NULL,
@@ -119,7 +119,7 @@ CREATE TABLE `messages` (
 --
 
 CREATE TABLE `moderators` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   `email` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -128,11 +128,11 @@ CREATE TABLE `moderators` (
 --
 
 CREATE TABLE `chatroom` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `chat_token` varchar(42) NOT NULL,
-  `number_of_messages` int(11) NOT NULL,
+  `number_of_messages` int(11) UNSIGNED NOT NULL,
   `recipient` varchar(120) NOT NULL,
-  `item_id` int(11) NOT NULL,
+  `item_id` int(11) UNSIGNED NOT NULL,
   `item_contact_mail` varchar(120) NOT NULL,
     FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
