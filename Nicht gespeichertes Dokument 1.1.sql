@@ -65,35 +65,17 @@ CREATE TABLE `category` (
   `title` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `category_has_item`
---
-
--- --------------------------------------------------------
-
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `item`
---
-
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `contact_mail` varchar(120) NOT NULL,
   `pictures_id` int(11) NOT NULL,
-  `title` int(11) NOT NULL,
+  `title` text(11) NOT NULL,
   `edit_token` varchar(42) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `description` text NOT NULL,
 PRIMARY KEY(id, contact_mail),
 FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
 
 CREATE TABLE `category_has_item` (
   `category_id` int(11) NOT NULL,
@@ -104,9 +86,6 @@ PRIMARY KEY(category_id, item_id, item_contact_mail),
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
---
--- Tabellenstruktur für Tabelle `item_has_pictures`
---
 
 CREATE TABLE `item_has_pictures` (
   `item_contact_mail` varchar(120) NOT NULL,
@@ -131,7 +110,6 @@ CREATE TABLE `messages` (
   `recipient` varchar(120) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `chatroom_id` int(11) NOT NULL,
-   FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
