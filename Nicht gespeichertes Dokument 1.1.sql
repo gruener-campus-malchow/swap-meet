@@ -73,27 +73,23 @@ CREATE TABLE `item` (
   `edit_token` varchar(42) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `description` text NOT NULL,
-PRIMARY KEY(id, contact_mail),
+PRIMARY KEY(id),
 FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `category_has_item` (
   `category_id` int(11) UNSIGNED NOT NULL,
   `item_id` int(11) UNSIGNED NOT NULL,
-  `item_contact_mail` varchar(120) NOT NULL, 
-PRIMARY KEY(category_id, item_id, item_contact_mail),
+PRIMARY KEY(category_id, item_id)
   FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `item_has_pictures` (
-  `item_contact_mail` varchar(120) NOT NULL,
   `item_id` int(11) UNSIGNED NOT NULL,
   `pictures_id` int(11) UNSIGNED NOT NULL,
-PRIMARY KEY(item_contact_mail, item_id, category_id),
+PRIMARY KEY(item_id, category_id),
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -133,9 +129,7 @@ CREATE TABLE `chatroom` (
   `number_of_messages` int(11) UNSIGNED NOT NULL,
   `recipient` varchar(120) NOT NULL,
   `item_id` int(11) UNSIGNED NOT NULL,
-  `item_contact_mail` varchar(120) NOT NULL,
-    FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (item_contact_mail) REFERENCES item(contact_mail) ON UPDATE CASCADE ON DELETE CASCADE
+    FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
 COMMIT;
