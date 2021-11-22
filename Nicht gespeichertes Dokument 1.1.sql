@@ -105,7 +105,7 @@ CREATE TABLE `messages` (
   `sender` varchar(120) NOT NULL,
   `recipient` varchar(120) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `chatroom_id` int(11) NOT NULL,
+  `chatroom_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
