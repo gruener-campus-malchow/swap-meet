@@ -113,7 +113,7 @@ CREATE TABLE `messages` (
   `sender` text NOT NULL,
   `recipient` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `chatroom_id` int(11) NOT NULL,
+  `chatroom_id` int(11) UNSIGNED NOT NULL,
     FOREIGN KEY (chatroom_id) REFERENCES chatroom(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
