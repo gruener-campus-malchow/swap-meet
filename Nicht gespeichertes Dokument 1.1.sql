@@ -88,7 +88,7 @@ PRIMARY KEY(category_id, item_id),
 CREATE TABLE `item_has_pictures` (
   `item_id` int(11) UNSIGNED NOT NULL,
   `pictures_id` int(11) UNSIGNED NOT NULL,
-PRIMARY KEY(item_id, category_id),
+PRIMARY KEY(item_id, pictures_id),
   FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
