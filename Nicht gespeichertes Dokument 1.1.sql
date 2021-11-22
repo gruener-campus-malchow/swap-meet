@@ -80,9 +80,9 @@ FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CA
 CREATE TABLE `category_has_item` (
   `category_id` int(11) UNSIGNED NOT NULL,
   `item_id` int(11) UNSIGNED NOT NULL,
-PRIMARY KEY(category_id, item_id)
+PRIMARY KEY(category_id, item_id),
   FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `item_has_pictures` (
