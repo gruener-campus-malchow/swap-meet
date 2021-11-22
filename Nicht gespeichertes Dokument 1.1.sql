@@ -93,6 +93,14 @@ PRIMARY KEY(item_id, pictures_id),
   FOREIGN KEY (pictures_id) REFERENCES pictures(id) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `chatroom` (
+  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `chat_token` text NOT NULL,
+  `item_id` int(11) UNSIGNED NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- --------------------------------------------------------
 
 --
@@ -123,13 +131,6 @@ CREATE TABLE `moderators` (
 --
 -- Tabellenstruktur für Tabelle `chatroom`
 --
-
-CREATE TABLE `chatroom` (
-  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `chat_token` text NOT NULL,
-  `item_id` int(11) UNSIGNED NOT NULL,
-    FOREIGN KEY (item_id) REFERENCES item(id) ON UPDATE CASCADE ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO blacklist_domain (domain) VALUES ("datenschutz.ru"), ("gmail.com"), ("web.de");
 INSERT INTO blacklist_person (email) VALUES ("baldauf@gruener-campus-malchow.de"), ("schulleiter@gruener-campus-malchow.de"), ("blabla@web.de");
