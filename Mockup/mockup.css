@@ -1473,6 +1473,13 @@ a {
 	box-shadow: none!important
 }
 
+.top {
+	text-align: center!important;
+    font-size: 50px;
+    text-decoration: underline solid;
+    font-size-adjust: auto
+}
+
 
 /* Colors */
 

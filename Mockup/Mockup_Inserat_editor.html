@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Inserate Editor</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="mockup.css">
@@ -21,7 +21,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </div>
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
     <a href="#" class="w3-bar-item w3-button">Kategorien</a>
-    <a href="#" class="w3-bar-item w3-button">Nachrichten</a>
   </div>
 </nav>
 
@@ -42,7 +41,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left">Inserate Editor</p>
+    <p class="top">Inserate Editor</p>
    
   </header>
 
@@ -127,27 +126,27 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Subscribe section -->
   <div class="w3-container w3-black w3-padding-32">
     <h1>Meta</h1>
-    <p>Title</p>
-    <p><input class="w3-input w3-border" type="text" placeholder="enter Title here" style="width:100%"></p>
-     <p>Description</p>
-    <p><textarea class="w3-input w3-border" type="text" placeholder="enter Description here" style="width:100%" rows="4"></textarea></p>
+    <p>Titel</p>
+    <p><input class="w3-input w3-border" type="text" placeholder="Titel hinzufügen" style="width:100%"></p>
+     <p>Beschreibung</p>
+    <p><textarea class="w3-input w3-border" type="text" placeholder="Beschreibung hinzufügen" style="width:100%" rows="4"></textarea></p>
 
-    <p>Tags</p>
+    <p>Kategorien</p>
     <p>
         <span class="w3-button w3-grey w3-margin-bottom"> 
-            <img src="./icons/remove_circle_outline_black_24dp.svg"> bikes
+            <img src="./icons/remove_circle_outline_black_24dp.svg"> Fahrräder
         </span>
         <span class="w3-button w3-grey w3-margin-bottom"> 
-            <img src="./icons/remove_circle_outline_black_24dp.svg"> racing
+            <img src="./icons/remove_circle_outline_black_24dp.svg"> Rennen
         </span>
         <span class="w3-button w3-grey w3-margin-bottom"> 
-            <img src="./icons/remove_circle_outline_black_24dp.svg"> fast
+            <img src="./icons/remove_circle_outline_black_24dp.svg"> schnell
         </span>
         <span class="w3-button w3-grey w3-margin-bottom"> 
-            <img src="./icons/remove_circle_outline_black_24dp.svg"> spareparts
+            <img src="./icons/remove_circle_outline_black_24dp.svg"> Verbrauchsteile
         </span>
         <span class="w3-button w3-grey w3-margin-bottom"> 
-            <img src="./icons/remove_circle_outline_black_24dp.svg"> sport
+            <img src="./icons/remove_circle_outline_black_24dp.svg"> Sport
         </span>
         <span class="w3-button w3-grey w3-margin-bottom"> 
             <img src="./icons/remove_circle_outline_black_24dp.svg"> Fahrradwerkstatt
@@ -165,10 +164,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </p>
 
 
-    <button type="button" class="w3-button w3-red w3-margin-bottom">Store</button>
-    <button type="button" class="w3-button w3-red w3-margin-bottom">Review</button>
-    <button type="button" class="w3-button w3-red w3-margin-bottom">Accept</button>
-    <button type="button" class="w3-button w3-red w3-margin-bottom">Decline</button>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Speichern</button>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Vorschau</button>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Annehmen</button>
+    <button type="button" class="w3-button w3-red w3-margin-bottom">Ablehnen</button>
   </div>
   
   <!-- Footer -->
@@ -182,27 +181,15 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </div>
 
 <!-- Overlays Modal -->
-<div id="newsletter" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
-    <div class="w3-container w3-white w3-center">
-      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-      <h2 class="w3-wide">NEWSLETTER</h2>
-      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
-    </div>
-  </div>
-</div>
-
 
 <div id="picture-upload" class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
     <div class="w3-container w3-white w3-center">
       <i onclick="document.getElementById('picture-upload').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-      <h2 class="w3-wide">Picture Uplaod</h2>
-      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
+      <h2 class="w3-wide">Hochladen von Bildern</h2>
+      <p>Hier können Sie Bilder für ihr Inserat hochladen.</p>
       <p><input class="w3-input w3-border" type="file"></p>
-      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('picture-upload').style.display='none'">Store</button>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('picture-upload').style.display='none'">Speichern</button>
     </div>
   </div>
 </div>
@@ -211,10 +198,10 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
     <div class="w3-container w3-white w3-center">
       <i onclick="document.getElementById('add-tag').style.display='none'" class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
-      <h2 class="w3-wide">Add Tag</h2>
-      <p>Join our mailing list to receive updates on new arrivals and special offers.</p>
-      <p><input class="w3-input w3-border" type="file"></p>
-      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('add-tag').style.display='none'">Store</button>
+      <h2 class="w3-wide">Kategorie hinzufügen</h2>
+      <p>Hier können Sie eine noch nicht vorhandene Kategorie hinzufügen, unter der Ihr Inserat angezeigt wird.</p>
+      <p><input class="w3-input w3-border" type="text"></p>
+      <button type="button" class="w3-button w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('add-tag').style.display='none'">Speichern</button>
     </div>
   </div>
 </div>
