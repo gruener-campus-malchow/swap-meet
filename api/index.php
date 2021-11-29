@@ -1,4 +1,7 @@
 <?php
+
+require_once('./models/model.php');
+
 class Api {
 	private $db;
 	private $json;
@@ -17,9 +20,11 @@ class Api {
 			$this->debugMessages = array();
 		}
         header('Content-Type: application/json');
+        
+        $this->dbConnect();
              
-        //$this->createTest();
-        $this->testDB();
+        $this->createTest();
+        //$this->testDB();
         
         if($this->debug){
 			$this->json = json_encode($this->debugMessages);
@@ -59,14 +64,18 @@ class Api {
 		return $this->json;
 	}
 	private function createTest(){
-		$data = array(
-			"foo" => "bar",
-			"bar" => "foo",
-		);
-		$this->json = json_encode($data);
+		
+		
+		$testmodel = new Model('item',$this->db);
+		$data1 = $testmodel->read();
+		
+		$testmodel = new Model('pictures',$this->db);
+		$data2 = $testmodel->read();
+		
+		$this->json = json_encode(array_merge($data1,$data2));
 	}
 	private function testDB(){
-		$this->dbConnect();
+		
 		$data = $this->executeSELECT('SELECT * FROM item');
 		$this->json = json_encode($data);
 	}
