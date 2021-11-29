@@ -2,17 +2,23 @@
 class Api {
 	private $db;
 	private $json;
+	private $config;
 	private $debug;
 	private $debugMessages;
 	
     public function __construct(){
+		
+		
+		$this->config = parse_ini_file('config.ini');
+		
 		$this->debug = FALSE;
+		
 		if($this->debug){
 			$this->debugMessages = array();
 		}
         header('Content-Type: application/json');
              
-        $this->createTest();
+        //$this->createTest();
         $this->testDB();
         
         if($this->debug){
@@ -20,22 +26,26 @@ class Api {
 		}
 	}
     private function dbConnect(){
+		
 		# TODO: Config FILE with git-ignore
-        $this->db = new PDO('mysql:host=localhost;dbname=strike_swap-meet', 'strike_swapmeet', '420');
+        $this->db = new PDO('mysql:host='.$this->config['db_host'].
+								';dbname='.$this->config['db_name'],
+								$this->config['db_user'], 
+								$this->config['db_password']);
         if ($this->debug){
 			$this->debugMessages = array_merge(array(
 				'errorcode' => $this->db->errorCode(),
 				'errorinfo' => $this->db->errorInfo()
 			), $this->debugMessages);
 		}
-        $this->json = json_encode($data);
+       // $this->json = json_encode($data);
     }
     private function executeSELECT($query){
 		$statement = $this->db->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         
-	  if ($this->debug){
+        if ($this->debug){
 			$this->debugMessages = array_merge(array(
 				'errorcode' => $this->db->errorCode(),
 				'errorinfo' => $this->db->errorInfo()
