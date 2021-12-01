@@ -14,7 +14,7 @@ class Api {
 		
 		$this->config = parse_ini_file('config.ini');
 		
-		$this->debug = FALSE;
+		$this->debug = $this->config['debug'];
 		
 		if($this->debug){
 			$this->debugMessages = array();
@@ -32,8 +32,7 @@ class Api {
 	}
     private function dbConnect(){
 		
-		# TODO: Config FILE with git-ignore
-        $this->db = new PDO('mysql:host='.$this->config['db_host'].
+		$this->db = new PDO('mysql:host='.$this->config['db_host'].
 								';dbname='.$this->config['db_name'],
 								$this->config['db_user'], 
 								$this->config['db_password']);
@@ -64,15 +63,32 @@ class Api {
 		return $this->json;
 	}
 	private function createTest(){
-		
+		$collection = array();
 		
 		$testmodel = new Model('item',$this->db);
-		$data1 = $testmodel->read();
-		
+		$data = $testmodel->readAll();
+		array_push($collection, $data);
+		if ($this->debug){
+			array_push($this->debugMessages, $testmodel->debugMessages);
+		}
+				
 		$testmodel = new Model('pictures',$this->db);
-		$data2 = $testmodel->read();
+		$data = $testmodel->readAll();
+		array_push($collection, $data);
+		if ($this->debug){
+			array_push($this->debugMessages, $testmodel->debugMessages);
+		}
+
+		$testmodel = new Model('item',$this->db);
+		$data = $testmodel->readSingle('1');
+		array_push($collection, $data);
+		if ($this->debug){
+			array_push($this->debugMessages, $testmodel->debugMessages);
+		}
+
+
 		
-		$this->json = json_encode(array_merge($data1,$data2));
+		$this->json = json_encode($collection);
 	}
 	private function testDB(){
 		
