@@ -22,8 +22,9 @@ class Api {
         header('Content-Type: application/json');
         
         $this->dbConnect();
-             
-        $this->createTest();
+        
+        $this->testUrlHandling();
+        //$this->createTest();
         //$this->testDB();
         
         if($this->debug){
@@ -65,34 +66,38 @@ class Api {
 	private function createTest(){
 		$collection = array();
 		
-		$testmodel = new Model('item',$this->db);
+		$testmodel = new Model('item',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
 				
-		$testmodel = new Model('pictures',$this->db);
+		$testmodel = new Model('pictures',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
 
-		$testmodel = new Model('item',$this->db);
+		$testmodel = new Model('item',$this->db, $this->debug);
 		$data = $testmodel->readSingle('1');
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
 
-
-		
 		$this->json = json_encode($collection);
 	}
 	private function testDB(){
 		
 		$data = $this->executeSELECT('SELECT * FROM item');
+		$this->json = json_encode($data);
+	}
+	
+	private function testUrlHandling(){
+		$data = array();
+		array_push($data, $_SERVER['REQUEST_URI']);
 		$this->json = json_encode($data);
 	}
 	

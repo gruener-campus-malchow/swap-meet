@@ -1,17 +1,6 @@
 <?php
-class Model {
-	protected $name;
-	protected $id;
-	protected $db;
-	protected $debug;
-	public $debugMessages;
-	
-	public function __construct($name, $db, $debug)
-	{
-		$this->name = $name;
-		$this->db = $db;
-		$this->debugMessages = array();
-	}
+class Category extends {
+
 	public function setId($id)
 	{
 		$this->id = $id;
