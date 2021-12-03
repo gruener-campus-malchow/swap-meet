@@ -1,5 +1,5 @@
 <?php
-class Model {
+class model {
 	protected $name;
 	protected $id;
 	protected $db;
@@ -15,6 +15,10 @@ class Model {
 	public function setId($id)
 	{
 		$this->id = $id;
+	}
+	public function getName()
+	{
+		return $this->name;
 	}
 	
 	public function readAll()

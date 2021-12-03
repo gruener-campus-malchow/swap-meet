@@ -1,5 +1,6 @@
 <?php
-class Category extends {
+require_once('model.php');
+class category extends model{
 
 	public function setId($id)
 	{

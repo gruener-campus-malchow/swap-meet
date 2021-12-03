@@ -23,9 +23,23 @@ class Api {
         
         $this->dbConnect();
         
-        $this->testUrlHandling();
+        //$this->testUrlHandling();
         //$this->createTest();
         //$this->testDB();
+        
+        $request = explode('/', $_SERVER['REQUEST_URI']);
+        
+        
+        $modelList = $this->readAvaliableModels();
+        
+        $modelObjects = array();
+        foreach ($modelList as $model)
+        {
+			$modelObject = $this->instantiateAvaliableModel($model);
+			array_push($modelObjects, $modelObject->getName());
+		}
+        
+        $this->json = json_encode($modelObjects);
         
         if($this->debug){
 			$this->json = json_encode($this->debugMessages);
@@ -66,21 +80,21 @@ class Api {
 	private function createTest(){
 		$collection = array();
 		
-		$testmodel = new Model('item',$this->db, $this->debug);
+		$testmodel = new model('item',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
 				
-		$testmodel = new Model('pictures',$this->db, $this->debug);
+		$testmodel = new model('pictures',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
 
-		$testmodel = new Model('item',$this->db, $this->debug);
+		$testmodel = new model('item',$this->db, $this->debug);
 		$data = $testmodel->readSingle('1');
 		array_push($collection, $data);
 		if ($this->debug){
@@ -100,6 +114,36 @@ class Api {
 		array_push($data, $_SERVER['REQUEST_URI']);
 		$this->json = json_encode($data);
 	}
+	
+	private function readAvaliableModels()
+	{
+	    // öffnen des Verzeichnisses
+		if ( $handle = opendir('./models/') )
+		{
+			// einlesen der Verzeichnisses
+			$data = array();
+			//array_push($data, 'put some files into list');
+			while (($file = readdir($handle)) !== false)
+			{
+				if (array_pop(explode('.',$file))== 'php')
+				{
+					array_push($data, $file);
+				}
+				
+			}
+			closedir($handle);
+		}else{
+			array_push($this->debugMessages, 'not a working directory');
+		}
+		return $data;
+	}
+	private function instantiateAvaliableModel($modelFile)
+	{
+		require_once('./models/'.$modelFile);
+		$modelname = explode('.',$modelFile)[0];
+		return new $modelname($modelname,$this->db,$this->debug);
+	}
+	
 	
 }
 
