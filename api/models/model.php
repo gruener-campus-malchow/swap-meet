@@ -4,13 +4,15 @@ class model {
 	protected $id;
 	protected $db;
 	protected $debug;
+	protected $request;
 	public $debugMessages;
 	
-	public function __construct($name, $db, $debug)
+	public function __construct($name, $db, $debug, $request)
 	{
 		$this->name = $name;
 		$this->db = $db;
 		$this->debugMessages = array();
+		$this->request = $request;
 	}
 	public function setId($id)
 	{
@@ -44,6 +46,14 @@ class model {
         $this->addDebugMessages($statement);
 		return $data;
 	}
+
+	public function readSpecial()
+	{
+		//this method have to be implemented in special model
+		$data = array('You want special things, I cannot serve right now.');
+		return $data;
+	}
+
 
 	private function update($id)
 	{

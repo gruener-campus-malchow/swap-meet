@@ -1,6 +1,6 @@
 <?php
 require_once('model.php');
-class category extends model{
+class item extends model{
 
 	
 	

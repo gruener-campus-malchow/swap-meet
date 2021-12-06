@@ -8,6 +8,7 @@ class Api {
 	private $config;
 	private $debug;
 	private $debugMessages;
+	private $request;
 	
     public function __construct(){
 		
@@ -27,19 +28,50 @@ class Api {
         //$this->createTest();
         //$this->testDB();
         
-        $request = explode('/', $_SERVER['REQUEST_URI']);
-        
+        $this->request = array();
+        foreach(explode('/', $_SERVER['REQUEST_URI']) as $element)
+        {
+			if($element != '')
+			{
+				array_push($this->request, $element);
+			}
+		}
         
         $modelList = $this->readAvaliableModels();
         
-        $modelObjects = array();
-        foreach ($modelList as $model)
+        if(!in_array($this->request[1].'.php',$modelList))
         {
-			$modelObject = $this->instantiateAvaliableModel($model);
-			array_push($modelObjects, $modelObject->getName());
+			header("HTTP/1.1 404 Not Found");
+			exit();
+		}
+		
+		$modelObject = $this->instantiateAvaliableModel($this->request[1].'.php');
+		
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+			// The request is using the POST method
+		}
+		else
+		{
+			if ($this->request[2]!='' and !array_key_exists(3,$this->request))
+			{
+				$data = $modelObject->readSingle($this->request[2]);
+				//$data = array('try the GET path and boring Things');
+			}
+			elseif ($this->request[2]!='' and $this->request[3]!='')
+			{
+				$data = $modelObject->readSpecial();    
+				//$data = array('try the GET path and Special Things');
+			}
+			else
+			{
+				$data = $modelObject->readAll();
+				//$data = array('try the GET path');
+			}
+			
+			$data = array($this->request, $data);
 		}
         
-        $this->json = json_encode($modelObjects);
+        $this->json = json_encode($data);
         
         if($this->debug){
 			$this->json = json_encode($this->debugMessages);
@@ -141,7 +173,7 @@ class Api {
 	{
 		require_once('./models/'.$modelFile);
 		$modelname = explode('.',$modelFile)[0];
-		return new $modelname($modelname,$this->db,$this->debug);
+		return new $modelname($modelname,$this->db,$this->debug, $this->request);
 	}
 	
 	
