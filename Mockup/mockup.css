@@ -1498,6 +1498,45 @@ a {
 
 }
 
+.table-head-left{
+
+
+
+}
+.table-head-middle{
+
+
+
+}
+.table-head-right{
+
+
+
+}
+.table-row-left{
+
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.table-row-right{
+
+    border-top: 1px solid #CECECE;
+    border-right: 1px solid #CECECE;
+    border-bottom: 1px solid #CECECE;
+    border-left: 0px;
+    margin: 0px
+}
+.table-row-middle{
+
+    border-top: 1px solid #CECECE;
+    border-right: 1px solid #CECECE;
+    border-bottom: 1px solid #CECECE;
+    border-left: 0px;
+    margin: 0px
+}
+
+
 
 /* Colors */
 
