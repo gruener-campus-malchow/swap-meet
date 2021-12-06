@@ -1491,6 +1491,13 @@ a {
     font-size-adjust: auto
 }
 
+.text-middle{
+    text-align: center!important;
+    font-size: 20px;
+    /*font-size-adjust: auto*/
+
+}
+
 
 /* Colors */
 
