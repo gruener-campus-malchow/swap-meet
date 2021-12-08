@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function ()
 
 	{ 
     // weiterleitung auf andere Views
-    alert("ich funktioniere");
+
     document.getElementById('name').addEventListener('click', test);
 }
 );
@@ -34,4 +34,4 @@ xhr.onload = function() {
   var data = JSON.parse(this.responseText);
   console.log(data);
   return value;
-};
+}
