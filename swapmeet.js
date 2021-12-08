@@ -1,22 +1,13 @@
 'use strict';
-
+console.log("ich funktioniere");
 document.addEventListener('DOMContentLoaded', function () 
 
 	{ 
     // weiterleitung auf andere Views
-    alert("ich funktioniere");
+
     document.getElementById('name').addEventListener('click', test);
 }
 );
-
-function test(){
-const para = document.createElement("p");
-const node = document.createTextNode("This is new.");
-para appendChild(node);
-
-
-const element = document.getElementById("test5");
-element.appendChild(para);
 
 
 function test11()
@@ -34,4 +25,4 @@ xhr.onload = function() {
   var data = JSON.parse(this.responseText);
   console.log(data);
   return value;
-};
+}
