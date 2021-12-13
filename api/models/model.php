@@ -34,7 +34,7 @@ class model {
 		return $data;
 	}
 	
-	// TODO: everything from now on!!!
+	
 	public function readSingle($id)
 	{
 		$query = "SELECT * FROM ".$this->name." WHERE id = :id";
