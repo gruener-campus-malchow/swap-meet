@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-<title>Tabelle Designidee</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script src= "js_dummy.js" ></script>
-<body>
 
- <div class="w3-container">
+document.body.innerHTML += `<div class="urmom">${foo()}
+
+<div class="w3-container">
 
 
   <table class="w3-table w3-striped w3-bordered">
@@ -29,10 +24,8 @@
       <td>67</td>
     </tr>
   </table>
-
-
 </div>
 
 
-</body>
-</html>
+
+</div>`;
