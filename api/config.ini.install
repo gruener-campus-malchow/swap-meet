@@ -1,0 +1,9 @@
+[database]
+db_name     = //insert name of dataabase here
+db_user     = //insert uder of dataabase here
+db_password = //insert password of user here
+db_host 	= //insert hostname here, e.g. localhost
+
+
+[application]
+debug = FALSE
