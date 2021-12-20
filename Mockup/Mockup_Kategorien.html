@@ -1,6 +1,56 @@
 <!DOCTYPE html>
 <html lang ="de">
 <head>
+  <style> 
+         table {  
+                border-collapse: collapse;
+                width: 100%;
+                } 
+           td,th {
+                   border: 1px solid #cccc; 
+                   padding: 8px; 
+                       }
+
+           tr {
+                  border: 1px dotted #cccc;
+}
+  </style> 
+
+  <script>
+  
+     let sortDirection = false;
+     let TableData = [
+                  {name: "Fahrräder", Anzahl: 4},
+                  {name: "Wasserkocher", Anzahl: 5},
+                  {name: "CDs" , Anzahl: 7},          
+
+    ];
+ 
+         loadTableData(tabledata)     
+
+
+    function LoadTableData(TableData) {
+
+            const tablebody = document.getElementByid('TableData');
+             let dataHtml= ''; 
+
+   for(Table of TableData){
+          
+     dataHtml += '<tr><td>${table.name}</td><td>${table.Anzahl} </tr></td> ';    
+
+        }
+        console.log(dataHtml)
+         
+        table.bodyinnerHTML = dataHtml;
+
+}
+    
+          
+                    
+</script>
+
+
+
 <title>Kategorien</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,17 +102,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 
   <!-- Product grid -->
-<div>
+<!--<div>
    <p class="text-middle">
     Willkommen auf der Tauschbörse Swap-Meet. Ich bin ein Platzhaltertext. Ca. 50 wörter. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate 
     </p>
-</div>
+</div> -->
 <div id="test5">
 <input id="name" type="button" value="Hallo">
 
 
 <!-- Tabelle ordentlich darstellen(css), Tablle automatisch mit JS erweitern(keine Ahnung wie) -->
- <table class="table">
+<!--<table class="table">
   <tr >
 <th class="table-row"> Name </th>
 <th class="table-row"> Anzahl der Inserate </th>
@@ -75,8 +125,29 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   </tr>
   <tr>
   </tr>
-</table> 
+</table>
+ -->
+
+
+
+
 <table>
+   <thead> 
+
+    <th>Name</th>
+     <th>Anzahl</th>
+  </thead>
+  
+ <tbody   id= "TableData" >
+ <tbody>
+
+</table>
+
+
+
+
+ 
+<!--<table>
   <tr>
     <th>Company</th>
     <th>Contact</th>
@@ -92,7 +163,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <td>Francisco Chang</td>
     <td>Mexico</td>
   </tr>
-</div>
+</div> --> 
    <!-- Footer -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     Nice Meat!
