@@ -12,8 +12,9 @@ class Api {
 	
     public function __construct(){
 		
-		
-		$this->config = parse_ini_file('config.ini');
+		require_once('config.php');
+		$this->config = $config;
+		//$this->config = parse_ini_file('config.ini');
 		
 		$this->debug = $this->config['debug'];
 		
@@ -48,7 +49,21 @@ class Api {
 		$modelObject = $this->instantiateAvaliableModel($this->request[1].'.php');
 		
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			// The request is using the POST method
+			if ($this->request[2]!='' and !array_key_exists(3,$this->request))
+			{
+				$data = $modelObject->update($this->request[2]);
+				//$data = array('try the GET path and boring Things');
+			}
+			elseif ($this->request[2]!='' and $this->request[3]!='')
+			{
+				$data = $modelObject->postSpecial();    
+				//$data = array('try the GET path and Special Things');
+			}
+			else
+			{
+				$data = $modelObject->create();
+				//$data = array('try the GET path');
+			}
 		}
 		else
 		{
@@ -59,7 +74,7 @@ class Api {
 			}
 			elseif ($this->request[2]!='' and $this->request[3]!='')
 			{
-				$data = $modelObject->readSpecial();    
+				$data = $modelObject->getSpecial();    
 				//$data = array('try the GET path and Special Things');
 			}
 			else
@@ -67,7 +82,8 @@ class Api {
 				$data = $modelObject->readAll();
 				//$data = array('try the GET path');
 			}
-			
+		}
+		if ($this->debug){
 			$data = array($this->request, $data);
 		}
         
@@ -79,10 +95,10 @@ class Api {
 	}
     private function dbConnect(){
 		
-		$this->db = new PDO('mysql:host='.$this->config['db_host'].
-								';dbname='.$this->config['db_name'],
-								$this->config['db_user'], 
-								$this->config['db_password']);
+		$this->db = new PDO('mysql:host='.$this->config['DB_HOST'].
+								';dbname='.$this->config['DB_NAME'],
+								$this->config['DB_USER'], 
+								$this->config['DB_PASSWORD']);
         if ($this->debug){
 			$this->debugMessages = array_merge(array(
 				'errorcode' => $this->db->errorCode(),

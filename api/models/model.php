@@ -47,7 +47,7 @@ class model {
 		return $data;
 	}
 
-	public function readSpecial()
+	public function getSpecial()
 	{
 		//this method have to be implemented in special model
 		$data = array('You want special things, I cannot serve right now.');
@@ -55,7 +55,7 @@ class model {
 	}
 
 
-	private function update($id)
+	public function update($id)
 	{
 		//this method have to be implemented with special model
 		return TRUE;
@@ -73,13 +73,18 @@ class model {
 		$this->addDebugMessages($statement);
 		return $data;
 	}
-	private function create()
+	public function create()
 	{
-		
-		//this method have to be implemented with special model
-		return TRUE;
+		return array("this method have to be implemented with special model");
 		
 	}
+	
+	public function postSpecial()
+	{
+		return array("this method have to be implemented with special model");
+		
+	}
+
 	
 	protected function pdoDump($stmt) 
 	{
