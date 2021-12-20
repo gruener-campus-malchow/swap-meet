@@ -12,7 +12,7 @@ function test()
 {
 
 let xhr = new XMLHttpRequest();
-xhr.open("POST", "/api/item", true);
+xhr.open("POST", "/api/category", true);
 xhr.setRequestHeader('Content-Type', 'application/json');
 xhr.send(JSON.stringify({
     title: 'testtitel',
