@@ -1,11 +1,9 @@
 'use strict';
 //alert("hilfe");
-document.addEventListener('DOMContentLoaded', function () 
-
-	{ 
+document.addEventListener('DOMContentLoaded', function ()
+{ 
     // weiterleitung auf andere Views
-
-    document.getElementById('name').addEventListener('click', test);
+    //document.getElementById('name').addEventListener('click', test);
     document.getElementById('name').addEventListener('click', testtest);
 }
 );
@@ -28,6 +26,7 @@ xhr.onload = function() {
 
 function testtest()
 {
+alert ("hello world");
 //setup our table array
 var tableArr = [
   ["row 1, cell 1", "row 1, cell 2"],
