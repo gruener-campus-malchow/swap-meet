@@ -12,9 +12,9 @@ function categoryTable() {
         description: 'category title'
     }));
     xhr.onload = function() {
-        console.log(this);
+        //console.log(this);
         var data = JSON.parse(this.responseText);
-        console.log(data);
+        //console.log(data[]);
 
         const elemdiv = document.createElement('div');
         elemdiv.setAttribute('id', 'test42');
@@ -40,41 +40,61 @@ function categoryTable() {
 };
 
 function Itemlist(clicked_id) {
-let xhr = new XMLHttpRequest();
-    xhr.open("GET", `/api/category_has_item/category_id:${clicked_id}`, true);
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", `/api/category_has_item/`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({
         title: 'daswadawdasdwa',
         description: 'wdadwadawdasdwadsa title'
     }));
     xhr.onload = function() {
-        console.log(this);
+        //console.log(this);
+
         var dataitemid = JSON.parse(this.responseText);
-        console.log(dataitemid);
-
-let xhr = new XMLHttpRequest();
-    xhr.open("GET", `/api/item/`, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-        title: 'daswadawdasdwa',
-        description: 'wdadwadawdasdwadsa title'
-    }));
-    xhr.onload = function() {
-        console.log(this);
-        var dataitems = JSON.parse(this.responseText);
-        console.log(dataitems);
-
-// Array dataitemid mit array dataitems abgleichen und nur Items ausgeben, deren id in dataitemid vorhanden ist. 
-
-
+        //console.log(dataitemid);
+        let items = [];
+        for (const elem of dataitemid) {
+            if (elem.category_id == clicked_id) items.push(elem.item_id);
+        };
+        console.log(items);
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", `/api/item/`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            title: 'daswadawdasdwa',
+            description: 'wdadwadawdasdwadsa title'
+        }));
+        xhr.onload = function() {
+            //console.log(this);
+            var dataitems = JSON.parse(this.responseText);
+			var test = test;
+            let items1 = [];
+			var test = items.length - 1;
+			console.log(dataitems);
+			while( test > -1) {
+            for (const elem1 of dataitems) {
+				
+                if (elem1.item_id == items[test]){ items1.push(elem1);}
+					var test = test - 1;
+					console.log(test);
+					}
+            };
+            console.log(items1);
+            var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th></tr><tr>";
+            var perrow = 1;
+            items1.forEach((value, i) => {
+                myTable += `<td class="w3-hover-blue" id="${value.id}" >${value.title}</td>`;
+                myTable += `<td class="w3-hover-green" id="${value.id}">${value.description}</td>`;
+                var next = i + 1;
+                if (next % perrow == 0 && next != items1.length) {
+                    myTable += "</tr><tr>";
+                }
+            });
+            myTable += "</tr></table>";
+            document.getElementById("test42").innerHTML = myTable;
         }
     }
-
 };
-
-
-
 // model category has items needed for column "Anzahl der Inserate"
 // model messages not working(no access to data)
-// somehow get id from row that was clicked on for Inserate list
 // event load not working, "onload = ..." in Mockup_Kategorien
