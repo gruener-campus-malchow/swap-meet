@@ -12,7 +12,7 @@ $config['DB_HOST'] = 'localhost';
 
 //email
 $config['EMAIL_USERNAME'] = 'unsinn@foo.de';
-$config['EMAIL_PASSWORD'] = 'streng geheim';
+$config['EMAIL_PASSWORD'] = 'wirklich streng geheim';
 $config['EMAIL_SMTP'] = 'smtp.*****.de';
 $config['EMAIL_PORT'] = '587';
 
