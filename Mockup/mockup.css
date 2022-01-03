@@ -1518,12 +1518,14 @@ a {
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
+    border-right: 0px solid black;
+	margin: 0px;
 }
 .table-row-right{
 
-    border-top: 1px solid #CECECE;
-    border-right: 1px solid #CECECE;
-    border-bottom: 1px solid #CECECE;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     border-left: 0px;
     margin: 0px
 }
@@ -1536,7 +1538,16 @@ a {
     margin: 0px
 }
 
+.table{
 
+}
+
+.tr.table-row{
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
 
 /* Colors */
 
