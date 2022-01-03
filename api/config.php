@@ -11,7 +11,7 @@ $config['DB_PASSWORD'] = '*****';
 $config['DB_HOST'] = 'localhost';
 
 //email
-$config['EMAIL_ADRESS'] = '*****';
+$config['EMAIL_USERNAME'] = 'unsinn@foo.de';
 $config['EMAIL_PASSWORD'] = '*****';
 $config['EMAIL_SMTP'] = 'smtp.*****.de';
 $config['EMAIL_PORT'] = '587';

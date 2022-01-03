@@ -189,7 +189,7 @@ class Api {
 	{
 		require_once('./models/'.$modelFile);
 		$modelname = explode('.',$modelFile)[0];
-		return new $modelname($modelname,$this->db,$this->debug, $this->request);
+		return new $modelname($modelname,$this->db,$this->debug, $this->request, $this->config);
 	}
 	
 	

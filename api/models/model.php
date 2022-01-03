@@ -5,14 +5,15 @@ class model {
 	protected $db;
 	protected $debug;
 	protected $request;
-	public $debugMessages;
+	protected $config;
 	
-	public function __construct($name, $db, $debug, $request)
+	public function __construct($name, $db, $debug, $request, $config)
 	{
 		$this->name = $name;
 		$this->db = $db;
 		$this->debugMessages = array();
 		$this->request = $request;
+		$this->config = $config;
 	}
 	public function setId($id)
 	{
