@@ -9,25 +9,25 @@ class Api {
 	private $debug;
 	private $debugMessages;
 	private $request;
-	
+
     public function __construct(){
-		
-		
+
+
 		$this->config = parse_ini_file('config.ini');
-		
+
 		$this->debug = $this->config['debug'];
-		
+
 		if($this->debug){
 			$this->debugMessages = array();
 		}
         header('Content-Type: application/json');
-        
+
         $this->dbConnect();
-        
+
         //$this->testUrlHandling();
         //$this->createTest();
         //$this->testDB();
-        
+
         $this->request = array();
         foreach(explode('/', $_SERVER['REQUEST_URI']) as $element)
         {
@@ -36,17 +36,17 @@ class Api {
 				array_push($this->request, $element);
 			}
 		}
-        
+
         $modelList = $this->readAvaliableModels();
-        
+
         if(!in_array($this->request[1].'.php',$modelList))
         {
 			header("HTTP/1.1 404 Not Found");
 			exit();
 		}
-		
+
 		$modelObject = $this->instantiateAvaliableModel($this->request[1].'.php');
-		
+
 		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			// The request is using the POST method
 		}
@@ -59,7 +59,7 @@ class Api {
 			}
 			elseif ($this->request[2]!='' and $this->request[3]!='')
 			{
-				$data = $modelObject->readSpecial();    
+				$data = $modelObject->readSpecial();
 				//$data = array('try the GET path and Special Things');
 			}
 			else
@@ -67,21 +67,21 @@ class Api {
 				$data = $modelObject->readAll();
 				//$data = array('try the GET path');
 			}
-			
+
 			$data = array($this->request, $data);
 		}
-        
+
         $this->json = json_encode($data);
-        
+
         if($this->debug){
 			$this->json = json_encode($this->debugMessages);
 		}
 	}
     private function dbConnect(){
-		
+
 		$this->db = new PDO('mysql:host='.$this->config['db_host'].
 								';dbname='.$this->config['db_name'],
-								$this->config['db_user'], 
+								$this->config['db_user'],
 								$this->config['db_password']);
         if ($this->debug){
 			$this->debugMessages = array_merge(array(
@@ -95,14 +95,14 @@ class Api {
 		$statement = $this->db->prepare($query);
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        
+
         if ($this->debug){
 			$this->debugMessages = array_merge(array(
 				'errorcode' => $this->db->errorCode(),
 				'errorinfo' => $this->db->errorInfo()
 			), $this->debugMessages);
 		}
-        
+
         return $data;
 	}
 	public function getJson()
@@ -111,14 +111,14 @@ class Api {
 	}
 	private function createTest(){
 		$collection = array();
-		
+
 		$testmodel = new model('item',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
 		if ($this->debug){
 			array_push($this->debugMessages, $testmodel->debugMessages);
 		}
-				
+
 		$testmodel = new model('pictures',$this->db, $this->debug);
 		$data = $testmodel->readAll();
 		array_push($collection, $data);
@@ -136,17 +136,17 @@ class Api {
 		$this->json = json_encode($collection);
 	}
 	private function testDB(){
-		
+
 		$data = $this->executeSELECT('SELECT * FROM item');
 		$this->json = json_encode($data);
 	}
-	
+
 	private function testUrlHandling(){
 		$data = array();
 		array_push($data, $_SERVER['REQUEST_URI']);
 		$this->json = json_encode($data);
 	}
-	
+
 	private function readAvaliableModels()
 	{
 	    // öffnen des Verzeichnisses
@@ -161,7 +161,7 @@ class Api {
 				{
 					array_push($data, $file);
 				}
-				
+
 			}
 			closedir($handle);
 		}else{
@@ -175,12 +175,9 @@ class Api {
 		$modelname = explode('.',$modelFile)[0];
 		return new $modelname($modelname,$this->db,$this->debug, $this->request);
 	}
-	
-	
+
+
 }
 
 $api = new Api();
 echo $api->getJson();
-
-
-?>
