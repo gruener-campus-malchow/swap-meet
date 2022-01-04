@@ -68,23 +68,37 @@ function Itemlist(clicked_id) {
             //console.log(this);
             var dataitems = JSON.parse(this.responseText);
             let items1 = [];
-			console.log(dataitems);
+            console.log(dataitems);
             for (const elem1 of dataitems) {
-                if (items.includes(elem1.id)){items1.push(elem1);}		
-            };
-            console.log(items1);
-            var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th></tr><tr>";
-            var perrow = 1;
-            items1.forEach((value1, i) => {
-                myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
-                myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
-                var next = i + 1;
-                if (next % perrow == 0 && next != items1.length) {
-                    myTable += "</tr><tr>";
+                if (items.includes(elem1.id)) {
+                    items1.push(elem1);
                 }
-            });
-            myTable += "</tr></table>";
-            document.getElementById("test42").innerHTML = myTable;
+            };
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", `/api/item_has_pictures/`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                title: 'daswadawdasdwa',
+                description: 'wdadwadawdasdwadsa title'
+            }));
+            xhr.onload = function() {
+                //console.log(this);
+
+                var datapicture1 = JSON.parse(this.responseText);
+                console.log(datapicture1);
+                var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th></tr><tr>";
+                var perrow = 1;
+                items1.forEach((value1, i) => {
+                    myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
+                    myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
+                    var next = i + 1;
+                    if (next % perrow == 0 && next != items1.length) {
+                        myTable += "</tr><tr>";
+                    }
+                });
+                myTable += "</tr></table>";
+                document.getElementById("test42").innerHTML = myTable;
+            }
         }
     }
 };
