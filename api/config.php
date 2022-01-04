@@ -1,29 +1,19 @@
-<? php
+<?php
 
-[database]
-db_name     = 
-db_user     = strike_swapmeet
-db_password = 420
-db_host 	= localhost
-
-
-[application]
-debug = FALSE
+# database
+define ( 'DB_NAME', 'my database name' );
+define ( 'DB_USER', 'my user' );
+define ( 'DB_PASS', 'my password' );
+define ( 'DB_HOST', 'localhost' );
 
 
-[email]
+# app
+define ( 'ENV', 'DEV' );
+#define ( 'ENV', 'PROD' );
 
-address 	= swapmeet@gcm.schule
-password 	= NM6YwL5XMBdW6HB
-smtp 		= smtp.ionos.de
-port 		= 587
 
-define ( 'DB_NAME', 'strike_swap-meet' );
-define ( 'DB_USER', 'strike_swap-meet' );
-define ( 'DB_NAME', 'strike_swap-meet' );
-define ( 'DB_NAME', 'strike_swap-meet' );
-define ( 'DB_NAME', 'strike_swap-meet' );
-define ( 'DB_NAME', 'strike_swap-meet' );
-define ( 'DB_NAME', 'strike_swap-meet' );
-
-$foo = HOST;
+# email
+define ( 'MAIL_USER', 'swapmeet@gcm.schule' );
+define ( 'MAIL_PASS', 'NM6YwL5XMBdW6HB' );
+define ( 'MAIL_SMTP', 'smtp.ionos.de' );
+define ( 'MAIL_PORT', 587 );
