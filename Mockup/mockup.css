@@ -157,6 +157,20 @@ select {
 	text-transform: none
 }
 
+
+
+Willkommen {
+    
+    border: solid black 2px;
+    font-size: 15px; 
+    text-align: center;
+    background-color: aqua;
+    
+    
+}
+
+
+
 button,
 [type=button],
 [type=reset],

@@ -67,24 +67,17 @@ function Itemlist(clicked_id) {
         xhr.onload = function() {
             //console.log(this);
             var dataitems = JSON.parse(this.responseText);
-			var test = test;
             let items1 = [];
-			var test = items.length - 1;
 			console.log(dataitems);
-			while( test > -1) {
             for (const elem1 of dataitems) {
-				
-                if (elem1.item_id == items[test]){ items1.push(elem1);}
-					var test = test - 1;
-					console.log(test);
-					}
+                if (items.includes(elem1.id)){items1.push(elem1);}		
             };
             console.log(items1);
             var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th></tr><tr>";
             var perrow = 1;
-            items1.forEach((value, i) => {
-                myTable += `<td class="w3-hover-blue" id="${value.id}" >${value.title}</td>`;
-                myTable += `<td class="w3-hover-green" id="${value.id}">${value.description}</td>`;
+            items1.forEach((value1, i) => {
+                myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
+                myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
                 var next = i + 1;
                 if (next % perrow == 0 && next != items1.length) {
                     myTable += "</tr><tr>";
