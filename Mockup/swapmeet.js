@@ -1,6 +1,6 @@
 'use strict';
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('name').addEventListener('click', categoryTable);
+    //document.getElementById('name').addEventListener('click', categoryTable);
 });
 
 function categoryTable() {
@@ -52,7 +52,7 @@ function Itemlist(clicked_id) {
 
         var dataitemid = JSON.parse(this.responseText);
         //console.log(dataitemid);
-        let items = [];
+        var items = [];
         for (const elem of dataitemid) {
             if (elem.category_id == clicked_id) items.push(elem.item_id);
         };
@@ -74,6 +74,7 @@ function Itemlist(clicked_id) {
                     items1.push(elem1);
                 }
             };
+            console.log(items1);
             let xhr = new XMLHttpRequest();
             xhr.open("GET", `/api/item_has_pictures/`, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
@@ -84,20 +85,47 @@ function Itemlist(clicked_id) {
             xhr.onload = function() {
                 //console.log(this);
 
-                var datapicture1 = JSON.parse(this.responseText);
-                console.log(datapicture1);
-                var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th></tr><tr>";
-                var perrow = 1;
-                items1.forEach((value1, i) => {
-                    myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
-                    myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
-                    var next = i + 1;
-                    if (next % perrow == 0 && next != items1.length) {
-                        myTable += "</tr><tr>";
+                var datapicture = JSON.parse(this.responseText);
+                console.log(datapicture);
+                var pictures = [];
+                for (const elem2 of datapicture) {
+                    if (items.includes(elem2.item_id)) {
+                        pictures.push(elem2.pictures_id);
                     }
-                });
-                myTable += "</tr></table>";
-                document.getElementById("test42").innerHTML = myTable;
+                };
+                console.log(pictures);
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", `/api/pictures/`, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({
+                    title: 'daswadawdasdwa',
+                    description: 'wdadwadawdasdwadsa title'
+                }));
+                xhr.onload = function() {
+                    //console.log(this);
+
+                    var datapicture1 = JSON.parse(this.responseText);
+                	for (const elem3 of datapicture1) {
+                    if (pictures.includes(elem3.id)) {
+                        items1.push(elem3.url);
+                    }
+                };
+                console.log(items1);
+					
+                    var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th class='table-row'>Bild</th></tr><tr>";
+                    var perrow = 1;
+                    items1.forEach((value1, i) => {
+                        myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
+                        myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
+                        var next = i + 1;
+                        if (next % perrow == 0 && next != items1.length) {
+                            myTable += "</tr><tr>";
+                        }
+                    });
+					
+                    myTable += "</tr></table>";
+                    document.getElementById("test42").innerHTML = myTable;
+                }
             }
         }
     }
