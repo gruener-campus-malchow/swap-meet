@@ -2,9 +2,5 @@ RewriteEngine On
 RewriteBase /api/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/api/public/
 RewriteRule . index.php
-
-<files *.ini>
-  order deny,allow
-  deny from all
-</files>
