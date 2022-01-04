@@ -1,2 +1,0 @@
-Also, die Fremdschlüssel mit Tabelle item funktionieren nicht!
-glaube der rest ist ok
