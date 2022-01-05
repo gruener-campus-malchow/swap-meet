@@ -95,7 +95,7 @@ function Itemlist(clicked_id) {
                 };
                 console.log(pictures);
                 let xhr = new XMLHttpRequest();
-                xhr.open("GET", `/api/pictures/`, true);
+                xhr.open('GET', `/api/pictures/`, true);
                 xhr.setRequestHeader('Content-Type', 'application/json');
                 xhr.send(JSON.stringify({
                     title: 'daswadawdasdwa',
@@ -104,20 +104,20 @@ function Itemlist(clicked_id) {
                 xhr.onload = function() {
                     //console.log(this);
 
-                    var datapicture1 = JSON.parse(this.responseText);
+                    let datapicture1 = JSON.parse(this.responseText);
                 	for (const elem3 of datapicture1) {
-                    if (pictures.includes(elem3.id)) {
-                        items1.push(elem3.url);
+                        if (pictures.includes(elem3.id)) {
+                            items1.push(elem3.url);
+                        }
                     }
-                };
-                console.log(items1);
+                    console.log(items1);
 					
-                    var myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </th><th class='table-row'>Bild</th></tr><tr>";
-                    var perrow = 1;
+                    let myTable = "<table id='categoryTable' class='w3-table w3-striped w3-bordered'><tr><th class='table-row'> Titel </th><th class='table-row'> Beschreibung </   th><th class='table-row'>Bild</th></tr><tr>";
+                    let perrow = 1;
                     items1.forEach((value1, i) => {
                         myTable += `<td class="w3-hover-blue" id="${value1.id}" >${value1.title}</td>`;
                         myTable += `<td class="w3-hover-green" id="${value1.id}">${value1.description}</td>`;
-                        var next = i + 1;
+                        let next = i + 1;
                         if (next % perrow == 0 && next != items1.length) {
                             myTable += "</tr><tr>";
                         }
@@ -130,6 +130,10 @@ function Itemlist(clicked_id) {
         }
     }
 };
+
+// Fremdschlüssel picture_id in items, was das Hauptbild ist. 
+
+
 // model category has items needed for column "Anzahl der Inserate"
 // model messages not working(no access to data)
 // event load not working, "onload = ..." in Mockup_Kategorien
