@@ -15,4 +15,4 @@
 
 # Inserate
 
-* PUT item(item_id)[item_title, item_description,[picture_id, picture_url], item_contact] : ID
+* POST item(item_id)[item_title, item_description,[picture_id, picture_url], item_contact] : ID
